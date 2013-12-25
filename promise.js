@@ -150,7 +150,7 @@ module.exports = function qFactory(nextTick) {
     },
     resolve: function(value) {
       // CHANGE STATE -> RESOLVED
-      return this.promise.finish(value, 'onFulfilled', new ResolvedHandler(this.promise, value));
+      return this.promise.finish(value, 'onFulfilled', new FulfilledHandler(this.promise, value));
     },
     reject: function(reason) {
       // CHANGE STATE -> REJECTED
@@ -158,9 +158,9 @@ module.exports = function qFactory(nextTick) {
     },
     state: 'pending'
   };
-  function ResolvedHandler(promise, value) { this.promise = promise; this.value = value; }
-  ResolvedHandler.prototype = {
-    constructor: ResolvedHandler,
+  function FulfilledHandler(promise, value) { this.promise = promise; this.value = value; }
+  FulfilledHandler.prototype = {
+    constructor: FulfilledHandler,
     then: function(onFulfilled, onRejected) {
       var deferred = defer();
       var wrapped = wrap(deferred, 'resolve', onFulfilled);
