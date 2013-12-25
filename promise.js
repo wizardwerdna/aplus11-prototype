@@ -169,6 +169,8 @@ module.exports = function qFactory(nextTick) {
         this.messages = [];
         var messages = this.messages, message, self = this;
         if (value instanceof DecoratedThenable) {
+          // This is really my corny interpretation of 2.3.2... This may not be necessary at all.
+          // If can get away without storing _deferred at all, that would be awesome.
           messages = value._deferred.handler.messages;
         }
         nextTick(function() {
@@ -203,6 +205,8 @@ module.exports = function qFactory(nextTick) {
         this.messages = [];
         var messages = this.messages, message, self = this;
         if (reason instanceof DecoratedThenable) {
+          // This is really my corny interpretation of 2.3.2... This may not be necessary at all.
+          // If can get away without storing _deferred at all, that would be awesome.
           messages = reason._deferred.handler.messages;
         }
         nextTick(function() {
