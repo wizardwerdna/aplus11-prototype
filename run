@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+var child_process = require('child_process');
+
+child_process.spawn('node_modules/.bin/promises-aplus-tests', ['promise-adaptor'], {
+	stdio: 'inherit'
+});
